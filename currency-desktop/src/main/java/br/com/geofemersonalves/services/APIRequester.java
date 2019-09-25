@@ -5,37 +5,72 @@ import org.apache.http.client.ResponseHandler;
 import org.apache.http.client.methods.HttpGet;
 import org.apache.http.impl.client.BasicResponseHandler;
 import org.apache.http.impl.client.DefaultHttpClient;
+import org.json.JSONObject;
 
 /**
- * Get informations from API http access point
+ * Get informations from API http end point
+ * 
+ *   APIKEY is a constant with the access key for the HGbrasil API.
+ * Here I am using a free one that I got with my HGbrasil account, 
+ * this key have limit access so it is better you get one 
+ * from https://hgbrasil.com/.       
  * 
  * @author Emerson Alves da silva
  * 
  */
 public class APIRequester {
+	private final static String IP_API_ENDPOINT="http://checkip.dyndns.org/";
 	private final static String APIKEY="5d57817e";
-
+	private final static String APIWEATHER_ENDPOINT="https://api.hgbrasil.com/weather?format=json-cors&key=";
+	private final static String APICURRENCIES_ENDPOINT="https://api.hgbrasil.com/finance?format=json-cors&key=";
 	/**
 	 * Get the external IP Address
 	 * 
 	 * @return String with the external IP Address
 	 * 
 	 */
-	public static String getExternalIP() {
-		final String IPAPIACCESSPOINT="http://checkip.dyndns.org/";
-		
+	public String getExternalIP() {
 		String ipAdress;
 		
-		ipAdress = sendRequest(IPAPIACCESSPOINT);
+		ipAdress = sendRequest(IP_API_ENDPOINT);
 		
-		return ipAdress.split(":")[1].trim().substring(0,ipAdress.split(":")[1].trim().indexOf("<"));		
+		ipAdress = ipAdress.split(":")[1].trim(); 
+		
+		return ipAdress.substring(0,ipAdress.indexOf("<"));		
 	}
 
-	
+	/**
+	 * Get the weather condition and forecast from HG Brasil Weather API
+	 * 
+	 * @return JSON object with the weather information
+	 * 
+	 */
+	public JSONObject getWeather() {
+		String weatherInfo;
+		weatherInfo=sendRequest(APIWEATHER_ENDPOINT+APIKEY);
+		
+		JSONObject weatherObj= new JSONObject(weatherInfo);
+		return weatherObj;
+	}
+	/**
+	 * Get the currencies information from HG Brasil Finance API
+	 * 
+	 * @return JSON object with the currencies information
+	 *
+	 */
+	public JSONObject getCurrencies() {
+		String currenciesInfo;
+		currenciesInfo = sendRequest(APICURRENCIES_ENDPOINT+APIKEY);
+		
+		JSONObject currenciesObj = new JSONObject(currenciesInfo);
+		
+		return currenciesObj;
+	}
 	/**
 	 *  Send a request for the api access point
 	 *  
 	 * @param httpAccessPoint - http address of access point
+	 * 
 	 * @return String with the API response
 	 * 
 	 */
@@ -53,8 +88,6 @@ public class APIRequester {
 			
 		} finally {
 			httpclient.getConnectionManager().shutdown();
-		}		
-			
+		}				
 	}
-
 }
