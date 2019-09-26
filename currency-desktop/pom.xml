@@ -12,7 +12,7 @@
   <name>Currency DeskTop</name>
   <description>This is a desktop progran that consume the https://hgbrasil.com/ API's.
                The principal usage for this progran is currency calculator always showing the 
-               currency get from hgbrasil finance API, also it shows the wheather from 
+               currency get from hgbrasil finance API, also it shows the weather from 
                the city that you are.</description>
 	<licenses>
 		<license>
