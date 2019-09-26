@@ -97,6 +97,10 @@ public class Weather {
 		}
 		this.forecast = arrayForecast;			
 	}
+	
+	public Weather() {
+		super();
+	}
 	/**
 	 * Create a new Weather with a JSONObject weather
 	 * 
@@ -128,4 +132,33 @@ public class Weather {
 		}
 		this.forecast = arrayForecast;			
 	}
+
+	@Override
+	public String toString() {
+		JSONObject obj = new JSONObject();
+		
+		obj.put("temp",temp);
+		obj.put("date",new SimpleDateFormat ("dd/MM/yyyy").format(date));
+		obj.put("time",new SimpleDateFormat ("hh:mm").format(time));
+		obj.put("condition_code",conditionCode);
+		obj.put("description",description);
+		obj.put("currently", currently);
+		obj.put("city",city);
+		obj.put("humidity",humidity);
+		obj.put("wind_speedy",windSpeedy);
+		obj.put("sunrise",sunrise);
+		obj.put("sunset" ,sunset);
+		obj.put("condition_slug",conditionSlug);
+		obj.put("city_name",cityName);
+		
+		//Convert ArrayList<Forecast> to a JSONArray and put it into to a JSONObject
+		JSONArray jsonArray = new JSONArray();
+		for (Forecast forecast2 : forecast) {
+			JSONObject objForecast = new JSONObject(forecast2.toString());
+			jsonArray.put(objForecast);
+		}
+		obj.put("forecast",jsonArray);
+		
+		return obj.toString();
+	}	
 }

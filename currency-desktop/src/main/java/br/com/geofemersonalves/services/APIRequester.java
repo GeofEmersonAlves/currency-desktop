@@ -48,8 +48,8 @@ public class APIRequester {
 	public JSONObject getWeather() {
 		String weatherInfo;
 		weatherInfo=sendRequest(APIWEATHER_ENDPOINT+APIKEY);
-		
 		JSONObject weatherObj= new JSONObject(weatherInfo);
+
 		return weatherObj;
 	}
 	/**
