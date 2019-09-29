@@ -25,7 +25,7 @@ public class Weather {
 	private String cityName;
 	private ArrayList<Forecast> forecast;
 	
-	//Constructor
+	//Constructors
 	/**
 	 * Create a new Weather with each parameter 
 	 * 
@@ -98,9 +98,6 @@ public class Weather {
 		this.forecast = arrayForecast;			
 	}
 	
-	public Weather() {
-		super();
-	}
 	/**
 	 * Create a new Weather with a JSONObject weather
 	 * 
@@ -132,6 +129,13 @@ public class Weather {
 		}
 		this.forecast = arrayForecast;			
 	}
+	/**
+	 * Create a empty weather obj
+	 */
+	public Weather() {
+		super();
+	}
+
 
 	@Override
 	public String toString() {
