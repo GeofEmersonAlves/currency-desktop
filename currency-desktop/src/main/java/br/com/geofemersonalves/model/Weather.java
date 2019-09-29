@@ -63,7 +63,12 @@ public class Weather {
 		this.cityName = cityName;
 		this.forecast = forecast;
 	}
-
+	/**
+	 * Create a empty weather obj
+	 */
+	public Weather() {
+		super();
+	}
 	/**
 	 * Create a new weather from a JSON String
 	 * 
@@ -75,7 +80,26 @@ public class Weather {
 		super();
 		
 		JSONObject obj = new JSONObject(jsonString);
-		
+		auxWeather(obj);
+	}
+	/**
+	 * Create a new Weather with a JSONObject weather
+	 * 
+	 * @param obj
+	 * @throws JSONException
+	 * @throws ParseException
+	 */
+	public Weather(JSONObject obj) throws JSONException, ParseException {
+		super();
+		auxWeather(obj);
+	}
+	/**
+	 * Private method to help the constructors don't repeat the java code
+	 * @param obj
+	 * @throws JSONException
+	 * @throws ParseException
+	 */
+	private void auxWeather(JSONObject obj) throws JSONException, ParseException {
 		this.temp = obj.getInt("temp");
 		this.date = new SimpleDateFormat("dd/MM/yyyy").parse(obj.getString("date"));
 		this.time = new SimpleDateFormat("hh:mm").parse(obj.getString("time"));
@@ -98,45 +122,6 @@ public class Weather {
 		this.forecast = arrayForecast;			
 	}
 	
-	/**
-	 * Create a new Weather with a JSONObject weather
-	 * 
-	 * @param obj
-	 * @throws JSONException
-	 * @throws ParseException
-	 */
-	public Weather(JSONObject obj) throws JSONException, ParseException {
-		super();
-		
-		this.temp = obj.getInt("temp");
-		this.date = new SimpleDateFormat("dd/MM/yyyy").parse(obj.getString("date"));
-		this.time = new SimpleDateFormat("hh:mm").parse(obj.getString("time"));
-		this.conditionCode = obj.getInt("condition_code");
-		this.description = obj.getString("description");
-		this.currently = obj.getString("currently");
-		this.city = obj.getString("city");
-		this.humidity = obj.getInt("humidity");
-		this.windSpeedy = obj.getString("wind_speedy");
-		this.sunrise = obj.getString("sunrise");
-		this.sunset = obj.getString("sunset");
-		this.conditionSlug = obj.getString("condition_slug");
-		this.cityName = obj.getString("city_name");
-		
-		JSONArray jsonArrayForecast= obj.getJSONArray("forecast");
-		ArrayList<Forecast> arrayForecast= new ArrayList<>();
-		for(int i =0; i<jsonArrayForecast.length();i++) {
-			arrayForecast.add(new Forecast(jsonArrayForecast.getJSONObject(i)));
-		}
-		this.forecast = arrayForecast;			
-	}
-	/**
-	 * Create a empty weather obj
-	 */
-	public Weather() {
-		super();
-	}
-
-
 	@Override
 	public String toString() {
 		JSONObject obj = new JSONObject();
