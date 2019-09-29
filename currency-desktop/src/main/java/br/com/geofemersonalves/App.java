@@ -20,10 +20,9 @@ public class App
         
         Weather weather=new Weather();
         try {
-			weather = new Weather(jsonWeather.getJSONObject("results"));
+        	weather = new Weather(jsonWeather.getJSONObject("results"));
 
         } catch (JSONException | ParseException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
         

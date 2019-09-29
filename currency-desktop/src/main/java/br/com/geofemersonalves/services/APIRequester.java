@@ -1,10 +1,12 @@
 package br.com.geofemersonalves.services;
 
-import org.apache.http.client.HttpClient;
+import java.io.IOException;
+
 import org.apache.http.client.ResponseHandler;
 import org.apache.http.client.methods.HttpGet;
 import org.apache.http.impl.client.BasicResponseHandler;
-import org.apache.http.impl.client.DefaultHttpClient;
+import org.apache.http.impl.client.CloseableHttpClient;
+import org.apache.http.impl.client.HttpClientBuilder;
 import org.json.JSONObject;
 
 /**
@@ -75,7 +77,9 @@ public class APIRequester {
 	 * 
 	 */
 	private static String sendRequest(String httpAccessPoint) {
-		HttpClient httpclient = new DefaultHttpClient();
+		//HttpClient httpclient = new DefaultHttpClient(); // ** Deprecated
+		CloseableHttpClient  httpclient = HttpClientBuilder.create().build();   
+		
 		try {
 			// URL definition
 			HttpGet httpget = new HttpGet(httpAccessPoint);  
@@ -87,7 +91,12 @@ public class APIRequester {
 			throw new RuntimeException("Something gets wrong!", e);
 			
 		} finally {
-			httpclient.getConnectionManager().shutdown();
+			//httpclient.getConnectionManager().shutdown(); // ** Deprecated
+			try {
+				httpclient.close();
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
 		}				
 	}
 }
