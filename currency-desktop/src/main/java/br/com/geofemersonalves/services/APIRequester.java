@@ -25,6 +25,8 @@ public class APIRequester {
 	private final static String APIKEY="5d57817e";
 	private final static String APIWEATHER_ENDPOINT="https://api.hgbrasil.com/weather?format=json-cors&key=";
 	private final static String APIFINANCESDATA_ENDPOINT="https://api.hgbrasil.com/finance?format=json-cors&key="; //fields=currencies,stocks,taxes&
+	private final static String USER_IP="&user_ip=";
+
 	/**
 	 * Get the external IP Address
 	 * 
@@ -49,7 +51,9 @@ public class APIRequester {
 	 */
 	public JSONObject getWeather() {
 		String weatherInfo;
-		weatherInfo=sendRequest(APIWEATHER_ENDPOINT+APIKEY);
+		String userIP=getExternalIP();
+		
+		weatherInfo=sendRequest(APIWEATHER_ENDPOINT+APIKEY+USER_IP+userIP);
 		JSONObject weatherObj= new JSONObject(weatherInfo);
 
 		return weatherObj;
