@@ -1,4 +1,4 @@
-package br.com.geofemersonalves;
+package br.com.geofemersonalves.model;
 
 import java.math.BigDecimal;
 import java.text.ParseException;
