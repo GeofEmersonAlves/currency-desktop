@@ -36,12 +36,11 @@ public class App
         JSONObject jsonFinances = apiRequester.getFinancalData();
         
         System.out.println("Currencies-----------------------");
-        
+        System.out.println(jsonFinances);
         JSONObject jsonCurrencies = jsonFinances.getJSONObject("results")
 		         								.getJSONObject("currencies");
         System.out.println(jsonCurrencies);               
         Currencies currencies= new Currencies(jsonCurrencies);
         System.out.println(currencies);
-        
     }
 }

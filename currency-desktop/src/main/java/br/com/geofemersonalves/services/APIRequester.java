@@ -24,7 +24,7 @@ public class APIRequester {
 	private final static String IP_API_ENDPOINT="http://checkip.dyndns.org/";
 	private final static String APIKEY="5d57817e";
 	private final static String APIWEATHER_ENDPOINT="https://api.hgbrasil.com/weather?format=json-cors&key=";
-	private final static String APIFINANCESDATA_ENDPOINT="https://api.hgbrasil.com/finance?format=json-cors&key=";
+	private final static String APIFINANCESDATA_ENDPOINT="https://api.hgbrasil.com/finance?format=json-cors&key="; //fields=currencies,stocks,taxes&
 	/**
 	 * Get the external IP Address
 	 * 
